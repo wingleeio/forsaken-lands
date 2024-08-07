@@ -7,6 +7,9 @@ export const ActionSchema = t.Union([
     t.Object({
         type: t.Literal("subtract"),
     }),
+    t.Object({
+        type: t.Literal("home"),
+    }),
 ]);
 
 export type Action = Static<typeof ActionSchema>;

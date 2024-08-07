@@ -15,5 +15,5 @@ export default function Home() {
 
     if (!data) return <div>Loading...</div>;
 
-    return <div>{data}</div>;
+    return <div>{data.message}</div>;
 }

@@ -1,10 +1,11 @@
 import { Button } from "$components/ui/button";
+import { isScene } from "$lib/utils";
 import { useGame } from "$hooks/useGame";
 
 export const Counter = () => {
     const { data, action } = useGame();
 
-    if (!data || data.type !== "counter") return null;
+    if (!isScene(data, "counter")) return null;
 
     return (
         <div className="flex gap-2 p-4">

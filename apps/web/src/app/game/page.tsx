@@ -2,6 +2,7 @@
 
 import { Counter } from "$components/scenes/Counter";
 import { Fragment } from "react";
+import { Intro } from "$components/scenes/Intro";
 import { useGame } from "$hooks/useGame";
 
 export default function Game() {
@@ -13,6 +14,7 @@ export default function Game() {
 
     return (
         <Fragment>
+            <Intro />
             <Counter />
         </Fragment>
     );

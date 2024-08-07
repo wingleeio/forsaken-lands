@@ -11,7 +11,11 @@ const events = new GeneratorEmitter();
 
 export const app = new Elysia()
     .use(cors({ origin: "*" }))
-    .get("/", () => "Hello Elysia")
+    .get("/", () => {
+        return {
+            message: "Hello Elysia",
+        };
+    })
     .get("/game", async function* () {
         let count = 0;
 
@@ -21,6 +25,12 @@ export const app = new Elysia()
 
         for await (const action of events.listen<Action>("game")) {
             switch (action.type) {
+                case "home":
+                    yield {
+                        type: "counter",
+                        count,
+                    } satisfies Scene as Scene;
+                    break;
                 case "add":
                     count++;
                     yield {
@@ -29,14 +39,14 @@ export const app = new Elysia()
                     } satisfies Scene as Scene;
                     break;
                 case "subtract":
-                    count--;
+                    if (count > 0) count--;
                     yield {
                         type: "counter",
                         count,
                     } satisfies Scene as Scene;
                     break;
                 default:
-                    break;
+                    continue;
             }
         }
     })
